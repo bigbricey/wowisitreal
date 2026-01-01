@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Videos Watched Per Second | Wow Is It Real</title>
+    <meta name="description" content="694,000 hours of YouTube are watched every second. The world's attention engine.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* YouTube-Inspired Red Pulse Effect */
+        body {
+            background: #0f0f0f;
+            overflow: hidden;
+        }
+
+        .youtube-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle,
+                    rgba(255, 0, 0, 0.15) 0%,
+                    transparent 70%);
+            animation: yt-pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes yt-pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        .play-button {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15rem;
+            color: rgba(255, 0, 0, 0.1);
+            z-index: -2;
+        }
+
+        .video-thumbnails {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .thumbnail {
+            position: absolute;
+            width: 80px;
+            height: 45px;
+            background: linear-gradient(135deg,
+                    rgba(255, 0, 0, 0.2) 0%,
+                    rgba(50, 50, 50, 0.3) 100%);
+            border-radius: 4px;
+            opacity: 0;
+            animation: float-thumb 8s ease-in-out infinite;
+        }
+
+        @keyframes float-thumb {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+
+            10% {
+                opacity: 0.4;
+            }
+
+            90% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+        }
+
+        .main-counter {
+            color: #ff0000;
+            text-shadow:
+                0 0 30px rgba(255, 0, 0, 0.8),
+                0 0 60px rgba(255, 0, 0, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(255, 100, 100, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(255, 150, 150, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 100, 100, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #ff0000;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: rgba(255, 100, 100, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #ff0000;
+            color: #fff;
+            border-color: #ff0000;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(255, 0, 0, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="youtube-glow"></div>
+    <div class="play-button">▶</div>
+    <div class="video-thumbnails" id="thumbnails"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">YouTube Hours Watched</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                694,000 hours of YouTube watched every second. 1 billion hours per day.
+                Tutorials, music videos, cat compilations, conspiracy theories—
+                the world's collective attention, captured and monetized.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Beyond the algorithm. Explore premium documentaries
+                    without the ads and clickbait.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 694000);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Floating thumbnails
+        const container = document.getElementById('thumbnails');
+
+        function createThumbnail() {
+            const thumb = document.createElement('div');
+            thumb.className = 'thumbnail';
+            thumb.style.left = Math.random() * 90 + '%';
+            thumb.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            thumb.style.animationDelay = Math.random() * 3 + 's';
+
+            container.appendChild(thumb);
+
+            setTimeout(() => thumb.remove(), 12000);
+        }
+
+        setInterval(createThumbnail, 500);
+
+        // Initial burst
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createThumbnail, i * 200);
+        }
+    </script>
+</body>
+
+</html>

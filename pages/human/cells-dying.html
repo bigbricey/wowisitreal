@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cells Dying in Your Body Per Second | Wow Is It Real</title>
+    <meta name="description" content="3.8 million cells die in your body every second. You are constantly renewing.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Cell Division / Microscopic Effect */
+        body {
+            background: #050510;
+            overflow: hidden;
+        }
+
+        #cell-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .main-counter {
+            color: #e879f9;
+            text-shadow:
+                0 0 30px rgba(232, 121, 249, 0.8),
+                0 0 60px rgba(232, 121, 249, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(232, 121, 249, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(232, 150, 249, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(232, 121, 249, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #e879f9;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(232, 121, 249, 0.1);
+            border: 1px solid rgba(232, 121, 249, 0.3);
+            color: rgba(232, 121, 249, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(232, 121, 249, 0.3);
+            color: #fff;
+            border-color: rgba(232, 121, 249, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(232, 121, 249, 0.6);
+            color: #e879f9;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(232, 121, 249, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #e879f9, #c026d3);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <canvas id="cell-canvas"></canvas>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Your Cells Dying</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                3.8 million cells die in your body every second.
+                But don't worry—you're also creating 3.8 million new ones.
+                In 7 years, almost every cell in your body will be replaced.
+                You are constantly becoming someone new.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Explore the miracle of human biology and
+                    the science of cellular regeneration.
+                </p>
+                <a href="../../go/brilliant.html">Learn on Brilliant.org →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        const counter = new LiveCounter('main-counter', 0, 3800000);
+        counter.start();
+
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Cell animation
+        const canvas = document.getElementById('cell-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const cells = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Cell {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.radius = Math.random() * 20 + 10;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.005;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+
+                if (this.life <= 0) {
+                    this.reset();
+                    this.life = 1;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius * this.life, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(232, 121, 249, ${this.life * 0.3})`;
+                ctx.fill();
+
+                // Cell membrane
+                ctx.strokeStyle = `rgba(232, 121, 249, ${this.life * 0.5})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            const cell = new Cell();
+            cell.life = Math.random();
+            cells.push(cell);
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(5, 5, 16, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            cells.forEach(cell => {
+                cell.update();
+                cell.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

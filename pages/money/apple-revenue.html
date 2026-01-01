@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Revenue Per Second | Wow Is It Real</title>
+    <meta name="description"
+        content="Apple generates $12,000 in revenue every second. The most valuable company on Earth.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Minimalist Apple Style Effect */
+        body {
+            background: #000;
+            overflow: hidden;
+        }
+
+        .apple-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle,
+                    rgba(255, 255, 255, 0.05) 0%,
+                    transparent 60%);
+            animation: apple-breathe 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes apple-breathe {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .apple-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.03);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z'/%3E%3C/svg%3E");
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z'/%3E%3C/svg%3E");
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        .main-counter {
+            color: #fff;
+            text-shadow:
+                0 0 30px rgba(255, 255, 255, 0.3);
+            font-size: clamp(2rem, 10vw, 5rem);
+            font-weight: 300;
+        }
+
+        .counter-title {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .counter-context {
+            color: rgba(200, 200, 200, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(200, 200, 200, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(30, 30, 30, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        .affiliate-bridge {
+            background: rgba(20, 20, 20, 0.8);
+            border-color: rgba(100, 100, 100, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="apple-glow"></div>
+    <div class="apple-logo"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Apple Revenue</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">$0</div>
+
+            <p class="counter-context">
+                Apple earns $12,000 every second. $383 billion per year.
+                iPhones, MacBooks, AirPods, App Store cuts—
+                the world's most valuable company prints money in minimalist packaging.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Learn the design thinking and business strategy
+                    that built the trillion-dollar company.
+                </p>
+                <a href="../../go/brilliant.html">Learn on Brilliant.org →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 12000, {
+            prefix: '$'
+        });
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>

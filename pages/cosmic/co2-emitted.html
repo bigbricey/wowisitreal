@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Emitted Per Second | Wow Is It Real</title>
+    <meta name="description" content="1,300 tons of CO2 are emitted every second. The atmosphere is changing.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Smoke/Pollution Rising Effect */
+        body {
+            background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+
+        .smoke-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .smoke {
+            position: absolute;
+            bottom: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle,
+                    rgba(100, 100, 100, 0.4) 0%,
+                    transparent 70%);
+            border-radius: 50%;
+            animation: smoke-rise 8s ease-out infinite;
+            filter: blur(20px);
+        }
+
+        @keyframes smoke-rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(3);
+                opacity: 0;
+            }
+        }
+
+        .factory-silhouette {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8rem;
+            color: rgba(50, 50, 50, 0.5);
+            z-index: -2;
+        }
+
+        .warning-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff8800, #ffcc00);
+            animation: warning-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warning-pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .main-counter {
+            color: #888;
+            text-shadow:
+                0 0 30px rgba(150, 150, 150, 0.8),
+                0 0 60px rgba(100, 100, 100, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(180, 180, 180, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(150, 150, 150, 0.7);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(150, 150, 150, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(100, 100, 100, 0.2);
+            border: 1px solid rgba(150, 150, 150, 0.3);
+            color: rgba(180, 180, 180, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(150, 150, 150, 0.3);
+            color: #fff;
+            border-color: rgba(150, 150, 150, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(150, 150, 150, 0.6);
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(150, 150, 150, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="warning-bar"></div>
+    <div class="smoke-container" id="smoke-container"></div>
+    <div class="factory-silhouette">🏭</div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">CO₂ Emitted (tons)</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                1,300 tons of CO₂ pumped into the atmosphere every second.
+                41 billion tons per year. The invisible gas changing our
+                climate, one molecule at a time.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Understand climate science and what we can do about it.
+                    Watch eye-opening environmental documentaries.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 1300);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Smoke effect
+        const container = document.getElementById('smoke-container');
+
+        function createSmoke() {
+            const smoke = document.createElement('div');
+            smoke.className = 'smoke';
+            smoke.style.left = (Math.random() * 60 + 20) + '%';
+            smoke.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            smoke.style.animationDelay = Math.random() * 2 + 's';
+            smoke.style.width = (Math.random() * 100 + 100) + 'px';
+            smoke.style.height = smoke.style.width;
+
+            container.appendChild(smoke);
+
+            setTimeout(() => smoke.remove(), 10000);
+        }
+
+        setInterval(createSmoke, 800);
+
+        // Initial burst
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createSmoke, i * 300);
+        }
+    </script>
+</body>
+
+</html>

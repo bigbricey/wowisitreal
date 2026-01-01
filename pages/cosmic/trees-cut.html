@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trees Cut Down Per Second | Wow Is It Real</title>
+    <meta name="description" content="27 trees are cut down every second. Earth's lungs are shrinking.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Deforestation Effect - Trees Fading */
+        body {
+            background: linear-gradient(180deg, #0f1a12 0%, #1a2e20 50%, #0f1a12 100%);
+            overflow: hidden;
+        }
+
+        .forest-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            z-index: -1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 50px;
+        }
+
+        .tree {
+            font-size: 4rem;
+            opacity: 0.5;
+            transition: opacity 2s, transform 1s;
+            transform-origin: bottom;
+        }
+
+        .tree.falling {
+            opacity: 0;
+            transform: rotate(90deg) translateX(100%);
+        }
+
+        .deforestation-warning {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255, 100, 100, 0.6);
+            z-index: 100;
+        }
+
+        .main-counter {
+            color: #4ade80;
+            text-shadow:
+                0 0 30px rgba(74, 222, 128, 0.8),
+                0 0 60px rgba(74, 222, 128, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(74, 222, 128, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(74, 222, 128, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(74, 222, 128, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #4ade80;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: rgba(74, 222, 128, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(74, 222, 128, 0.3);
+            color: #fff;
+            border-color: rgba(74, 222, 128, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(74, 222, 128, 0.6);
+            color: #4ade80;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(74, 222, 128, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="forest-container" id="forest"></div>
+    <div class="deforestation-warning">⚠ TREES DISAPPEARING IN REAL-TIME</div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Trees Cut Down</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                27 trees fall every second. 15 billion per year.
+                Ancient forests that took centuries to grow,
+                gone in seconds. Earth's lungs are shrinking.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Watch incredible documentaries about our planet
+                    and what we can do to protect it.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 27);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Forest effect
+        const forest = document.getElementById('forest');
+        const treeEmojis = ['🌲', '🌳', '🌴', '🌿'];
+        let treeCount = 0;
+        const maxTrees = 15;
+
+        // Create initial forest
+        function addTree() {
+            if (treeCount >= maxTrees) return;
+
+            const tree = document.createElement('div');
+            tree.className = 'tree';
+            tree.textContent = treeEmojis[Math.floor(Math.random() * treeEmojis.length)];
+            tree.style.fontSize = (Math.random() * 2 + 3) + 'rem';
+            forest.appendChild(tree);
+            treeCount++;
+        }
+
+        // Add initial trees
+        for (let i = 0; i < maxTrees; i++) {
+            addTree();
+        }
+
+        // Periodically fell and regrow trees
+        setInterval(() => {
+            const trees = forest.querySelectorAll('.tree:not(.falling)');
+            if (trees.length > 0) {
+                const randomTree = trees[Math.floor(Math.random() * trees.length)];
+                randomTree.classList.add('falling');
+
+                // Remove and add new tree
+                setTimeout(() => {
+                    randomTree.remove();
+                    treeCount--;
+                    addTree();
+                }, 2000);
+            }
+        }, 800);
+    </script>
+</body>
+
+</html>

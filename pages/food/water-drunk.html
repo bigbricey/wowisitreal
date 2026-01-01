@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Drunk Per Second (Global) | Wow Is It Real</title>
+    <meta name="description" content="3 billion glasses of water drunk every day. Hydration keeps humanity alive.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Water Ripple Effect */
+        body {
+            background: linear-gradient(180deg, #050515 0%, #0a1525 100%);
+            overflow: hidden;
+        }
+
+        .water-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: drop-fall 2s ease-in forwards;
+        }
+
+        @keyframes drop-fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .ripple {
+            position: absolute;
+            border: 2px solid rgba(56, 189, 248, 0.5);
+            border-radius: 50%;
+            animation: ripple-expand 2s ease-out forwards;
+        }
+
+        @keyframes ripple-expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            100% {
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+                margin-left: -50px;
+                margin-top: -50px;
+            }
+        }
+
+        .main-counter {
+            color: #38bdf8;
+            text-shadow:
+                0 0 30px rgba(56, 189, 248, 0.8),
+                0 0 60px rgba(56, 189, 248, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(56, 189, 248, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(56, 189, 248, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(56, 189, 248, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #38bdf8;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: rgba(56, 189, 248, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(56, 189, 248, 0.3);
+            color: #fff;
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(56, 189, 248, 0.6);
+            color: #38bdf8;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="water-container" id="water"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Glasses of Water Drunk</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                35,000 glasses of water drunk every second. 3 billion per day.
+                The most fundamental need—the same H2O molecules
+                that dinosaurs drank, cycling through us still.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Explore the science of water, hydration, and
+                    the blue planet we call home.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        const counter = new LiveCounter('main-counter', 0, 35000);
+        counter.start();
+
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        const container = document.getElementById('water');
+
+        function createDrop() {
+            const drop = document.createElement('div');
+            drop.className = 'water-drop';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.background = `rgba(56, 189, 248, ${Math.random() * 0.5 + 0.3})`;
+
+            container.appendChild(drop);
+
+            // Create ripple at bottom
+            setTimeout(() => {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = drop.style.left;
+                ripple.style.bottom = '20%';
+                container.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 2000);
+            }, 1800);
+
+            setTimeout(() => drop.remove(), 2000);
+        }
+
+        setInterval(createDrop, 200);
+        for (let i = 0; i < 5; i++) setTimeout(createDrop, i * 100);
+    </script>
+</body>
+
+</html>

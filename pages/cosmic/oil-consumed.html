@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oil Barrels Consumed Per Second | Wow Is It Real</title>
+    <meta name="description" content="1,100 barrels of oil are consumed every second. The world runs on fossil fuel.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Oil Drip / Black Gold Effect */
+        body {
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+
+        .oil-drip-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .oil-drip {
+            position: absolute;
+            top: -50px;
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(30, 30, 30, 0.8) 30%,
+                    #1a1a1a 100%);
+            border-radius: 0 0 50% 50%;
+            animation: drip 3s linear infinite;
+        }
+
+        @keyframes drip {
+            0% {
+                transform: translateY(0) scaleY(1);
+            }
+
+            100% {
+                transform: translateY(100vh) scaleY(2);
+            }
+        }
+
+        .oil-pool {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(180deg,
+                    rgba(20, 20, 20, 0.8) 0%,
+                    #0f0f0f 100%);
+            box-shadow: 0 0 50px rgba(50, 50, 50, 0.3) inset;
+        }
+
+        .oil-shimmer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    transparent 40%,
+                    rgba(100, 80, 150, 0.1) 45%,
+                    rgba(80, 150, 100, 0.1) 50%,
+                    transparent 55%);
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .main-counter {
+            color: #1a1a1a;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            text-shadow:
+                0 0 30px rgba(100, 100, 100, 0.5),
+                2px 2px 0 rgba(50, 50, 50, 0.8);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(200, 200, 200, 0.8);
+        }
+
+        .counter-context {
+            color: rgba(150, 150, 150, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(200, 200, 200, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 6px;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(50, 50, 50, 0.5);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            color: rgba(200, 200, 200, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(100, 100, 100, 0.5);
+            color: #fff;
+            border-color: rgba(150, 150, 150, 0.5);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(150, 150, 150, 0.5);
+            color: #fff;
+        }
+
+        .affiliate-bridge {
+            background: rgba(20, 20, 20, 0.9);
+            border-color: rgba(100, 100, 100, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #333, #555);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="oil-drip-container" id="drip-container"></div>
+    <div class="oil-pool">
+        <div class="oil-shimmer"></div>
+    </div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Oil Barrels Consumed</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                1,100 barrels of oil consumed every second. 100 million barrels per day.
+                Fueling cars, planes, plastics, and modern civilization—
+                ancient sunlight burned in an instant.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Explore the history, politics, and future of energy.
+                    Essential documentaries on our oil-dependent world.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 1100);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Oil drips
+        const container = document.getElementById('drip-container');
+
+        function createDrip() {
+            const drip = document.createElement('div');
+            drip.className = 'oil-drip';
+            drip.style.left = Math.random() * 100 + '%';
+            drip.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            drip.style.animationDelay = Math.random() * 1 + 's';
+            drip.style.width = (Math.random() * 6 + 4) + 'px';
+
+            container.appendChild(drip);
+
+            setTimeout(() => drip.remove(), 5000);
+        }
+
+        setInterval(createDrip, 200);
+
+        // Initial burst
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createDrip, i * 100);
+        }
+    </script>
+</body>
+
+</html>

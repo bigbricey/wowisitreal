@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emails Sent Per Second | Wow Is It Real</title>
+    <meta name="description"
+        content="3.5 million emails are sent every second. The digital postal system never sleeps.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Flying Envelope Effect */
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+        }
+
+        .envelope-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .flying-envelope {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: fly-across 4s linear infinite;
+        }
+
+        @keyframes fly-across {
+            0% {
+                transform: translateX(-50px) translateY(0) rotate(-10deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateX(calc(100vw + 50px)) translateY(-100px) rotate(10deg);
+                opacity: 0;
+            }
+        }
+
+        .main-counter {
+            color: #00b4d8;
+            text-shadow:
+                0 0 30px rgba(0, 180, 216, 0.8),
+                0 0 60px rgba(0, 180, 216, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(0, 180, 216, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(0, 180, 216, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(0, 180, 216, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #00b4d8;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            color: rgba(0, 180, 216, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(0, 180, 216, 0.3);
+            color: #fff;
+            border-color: rgba(0, 180, 216, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(0, 180, 216, 0.6);
+            color: #00b4d8;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(0, 180, 216, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #00b4d8, #0096c7);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="envelope-container" id="envelope-container"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Emails Sent</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                3.5 million emails every second. 306 billion per day.
+                Job offers, love letters, spam, newsletters, invoices—
+                the world's conversations flying through servers at light speed.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// PROTECTION TOOL</div>
+                <p class="offer-text">
+                    Every email reveals your IP address. Protect your
+                    privacy and encrypt your connection.
+                </p>
+                <a href="../../go/vpn.html">Get NordVPN →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 3500000);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Flying envelope effect
+        const container = document.getElementById('envelope-container');
+        const emojis = ['✉️', '📧', '📨', '📩', '💌'];
+
+        function createEnvelope() {
+            const envelope = document.createElement('div');
+            envelope.className = 'flying-envelope';
+            envelope.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            envelope.style.top = Math.random() * 80 + 10 + '%';
+            envelope.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            envelope.style.animationDelay = Math.random() * 2 + 's';
+            envelope.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+
+            container.appendChild(envelope);
+
+            // Remove after animation
+            setTimeout(() => envelope.remove(), 6000);
+        }
+
+        // Create envelopes regularly
+        setInterval(createEnvelope, 300);
+
+        // Initial burst
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createEnvelope, i * 200);
+        }
+    </script>
+</body>
+
+</html>

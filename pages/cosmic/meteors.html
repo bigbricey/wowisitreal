@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteors Hitting Earth Per Second | Wow Is It Real</title>
+    <meta name="description" content="25 million meteors hit Earth's atmosphere every day. We're being bombarded.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Meteor Shower Effect */
+        body {
+            background: radial-gradient(ellipse at 50% 0%, #1a1a3e 0%, #0a0a12 100%);
+            overflow: hidden;
+        }
+
+        .meteor-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 200, 100, 0.8) 50%,
+                    rgba(255, 100, 50, 1) 100%);
+            transform: rotate(-45deg);
+            animation: meteor-fall 1s linear forwards;
+            filter: blur(1px);
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                transform: translateX(-100px) translateY(-100px) rotate(-45deg);
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(200px) translateY(200px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        .atmosphere-glow {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(100, 150, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .main-counter {
+            color: #ff6b35;
+            text-shadow:
+                0 0 30px rgba(255, 107, 53, 0.8),
+                0 0 60px rgba(255, 150, 100, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(255, 150, 100, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(255, 180, 150, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 150, 100, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #ff6b35;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: rgba(255, 150, 100, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 107, 53, 0.3);
+            color: #fff;
+            border-color: rgba(255, 107, 53, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(255, 107, 53, 0.6);
+            color: #ff6b35;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #ff6b35, #ff9f6b);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="meteor-container" id="meteor-container"></div>
+    <div class="atmosphere-glow"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Meteors Hitting Earth</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                289 meteors hit Earth's atmosphere every second. 25 million per day.
+                Most burn up before reaching ground. We live in a cosmic shooting
+                gallery, protected only by a thin shell of air.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Explore the cosmos and the forces that shape our solar system.
+                    Stunning space documentaries await.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // 25 million per day = ~289 per second
+        const counter = new LiveCounter('main-counter', 0, 289);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Meteor shower effect
+        const container = document.getElementById('meteor-container');
+
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.className = 'meteor';
+            meteor.style.left = Math.random() * 100 + '%';
+            meteor.style.top = Math.random() * 50 + '%';
+            meteor.style.width = (Math.random() * 80 + 40) + 'px';
+            meteor.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+
+            container.appendChild(meteor);
+
+            setTimeout(() => meteor.remove(), 1500);
+        }
+
+        // Create meteors
+        setInterval(createMeteor, 200);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Hours Watched Per Second | Wow Is It Real</title>
+    <meta name="description" content="452,000 hours of Netflix are streamed every second. The world is binging.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Netflix Dark Room Effect */
+        body {
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+
+        .screen-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse,
+                    rgba(229, 9, 20, 0.15) 0%,
+                    transparent 70%);
+            animation: screen-flicker 5s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes screen-flicker {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            52% {
+                opacity: 0.8;
+            }
+
+            54% {
+                opacity: 1;
+            }
+        }
+
+        .netflix-n {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20rem;
+            font-weight: bold;
+            color: rgba(229, 9, 20, 0.08);
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: -2;
+        }
+
+        .tudum {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(229, 9, 20, 0.4);
+            letter-spacing: 0.5em;
+        }
+
+        .main-counter {
+            color: #e50914;
+            text-shadow:
+                0 0 30px rgba(229, 9, 20, 0.8),
+                0 0 60px rgba(229, 9, 20, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(229, 100, 100, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(200, 150, 150, 0.7);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(229, 100, 100, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #e50914;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            color: rgba(229, 100, 100, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #e50914;
+            color: #fff;
+            border-color: #e50914;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #e50914;
+            color: #e50914;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(229, 9, 20, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: #e50914;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="screen-glow"></div>
+    <div class="netflix-n">N</div>
+    <div class="tudum">T U D U M</div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Netflix Hours Watched</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                452,000 hours of Netflix watched every second. 17 billion per month.
+                True crime, K-dramas, documentaries, and "Are you still watching?"
+                The world's couch is warm.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Go beyond Netflix. Discover award-winning documentaries
+                    you won't find anywhere else.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 452000);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>

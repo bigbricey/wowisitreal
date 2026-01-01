@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Revenue Per Second | Wow Is It Real</title>
+    <meta name="description" content="Google makes $10,500 every second. Search is a money printer.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Google Colors Effect */
+        body {
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+
+        .google-letters {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 8px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .google-letter {
+            font-size: 8rem;
+            font-weight: bold;
+            animation: letter-pulse 3s ease-in-out infinite;
+        }
+
+        .google-letter:nth-child(1) {
+            color: #4285f4;
+            animation-delay: 0s;
+        }
+
+        .google-letter:nth-child(2) {
+            color: #ea4335;
+            animation-delay: 0.2s;
+        }
+
+        .google-letter:nth-child(3) {
+            color: #fbbc05;
+            animation-delay: 0.4s;
+        }
+
+        .google-letter:nth-child(4) {
+            color: #4285f4;
+            animation-delay: 0.6s;
+        }
+
+        .google-letter:nth-child(5) {
+            color: #34a853;
+            animation-delay: 0.8s;
+        }
+
+        .google-letter:nth-child(6) {
+            color: #ea4335;
+            animation-delay: 1s;
+        }
+
+        @keyframes letter-pulse {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(1.05);
+            }
+        }
+
+        .ad-floating {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .ad-unit {
+            position: absolute;
+            padding: 6px 12px;
+            background: rgba(66, 133, 244, 0.1);
+            border: 1px solid rgba(66, 133, 244, 0.2);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: rgba(66, 133, 244, 0.5);
+            animation: ad-float 8s ease-in-out infinite;
+        }
+
+        @keyframes ad-float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateY(-10px);
+                opacity: 0.5;
+            }
+        }
+
+        .main-counter {
+            color: #4285f4;
+            text-shadow:
+                0 0 30px rgba(66, 133, 244, 0.8),
+                0 0 60px rgba(66, 133, 244, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(66, 133, 244, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(120, 160, 244, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(66, 133, 244, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #4285f4;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(66, 133, 244, 0.1);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            color: rgba(66, 133, 244, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #4285f4;
+            color: #fff;
+            border-color: #4285f4;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #4285f4;
+            color: #4285f4;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(66, 133, 244, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #4285f4, #1a73e8);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="ad-floating" id="ads"></div>
+    <div class="google-letters">
+        <span class="google-letter">G</span>
+        <span class="google-letter">o</span>
+        <span class="google-letter">o</span>
+        <span class="google-letter">g</span>
+        <span class="google-letter">l</span>
+        <span class="google-letter">e</span>
+    </div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Google (Alphabet) Revenue</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">$0</div>
+
+            <p class="counter-context">
+                Google earns $10,500 every second. $330 billion per year.
+                Search ads, YouTube ads, Cloud, Android—
+                every click, every view feeds the machine.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Understand the algorithms that power modern
+                    search, ads, and AI systems.
+                </p>
+                <a href="../../go/brilliant.html">Learn on Brilliant.org →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        const counter = new LiveCounter('main-counter', 0, 10500, { prefix: '$' });
+        counter.start();
+
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Floating ad units
+        const ads = document.getElementById('ads');
+        const adTexts = ['Ad', 'Sponsored', 'AD', '广告', 'Anzeige'];
+
+        for (let i = 0; i < 15; i++) {
+            const ad = document.createElement('div');
+            ad.className = 'ad-unit';
+            ad.textContent = adTexts[Math.floor(Math.random() * adTexts.length)];
+            ad.style.left = Math.random() * 90 + '%';
+            ad.style.top = Math.random() * 90 + '%';
+            ad.style.animationDelay = (Math.random() * 8) + 's';
+            ads.appendChild(ad);
+        }
+    </script>
+</body>
+
+</html>

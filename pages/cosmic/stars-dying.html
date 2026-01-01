@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stars Dying Per Second | Wow Is It Real</title>
+    <meta name="description"
+        content="A star dies somewhere in the universe every second. Cosmic destruction creates everything.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Supernova Explosion Effect */
+        body {
+            background: #000;
+            overflow: hidden;
+        }
+
+        .star-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .supernova {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: supernova-explode 3s ease-out forwards;
+        }
+
+        @keyframes supernova-explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow:
+                    0 0 10px #fff,
+                    0 0 20px #ff6b6b,
+                    0 0 40px #ffc107;
+            }
+
+            30% {
+                transform: scale(20);
+                opacity: 1;
+                box-shadow:
+                    0 0 30px #fff,
+                    0 0 60px #ff6b6b,
+                    0 0 100px #ffc107;
+            }
+
+            100% {
+                transform: scale(50);
+                opacity: 0;
+                box-shadow:
+                    0 0 0 transparent;
+            }
+        }
+
+        .main-counter {
+            color: #fff;
+            text-shadow:
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 100, 100, 0.5),
+                0 0 60px rgba(255, 200, 100, 0.3);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(255, 200, 150, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(200, 180, 160, 0.7);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 200, 150, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 200, 150, 0.1);
+            border: 1px solid rgba(255, 200, 150, 0.3);
+            color: rgba(255, 200, 150, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 200, 150, 0.3);
+            color: #fff;
+            border-color: rgba(255, 200, 150, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(255, 200, 150, 0.6);
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(255, 200, 150, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #ff6b6b, #ffc107);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="star-field" id="star-field"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Stars Dying</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                Approximately 1 star dies somewhere in the observable universe every second.
+                When massive stars explode as supernovae, they forge heavy elements—
+                the iron in your blood, the gold in your jewelry. We are made of dead stars.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Explore the birth and death of stars, black holes,
+                    and the cosmic forces shaping our universe.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 1, {
+            decimals: 1
+        });
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Star field
+        const starField = document.getElementById('star-field');
+
+        // Create background stars
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = Math.random() * 0.6 + 0.2;
+            star.style.width = (Math.random() * 2 + 1) + 'px';
+            star.style.height = star.style.width;
+            starField.appendChild(star);
+        }
+
+        // Create supernova explosions
+        function createSupernova() {
+            const supernova = document.createElement('div');
+            supernova.className = 'supernova';
+            supernova.style.left = Math.random() * 90 + 5 + '%';
+            supernova.style.top = Math.random() * 80 + 10 + '%';
+
+            starField.appendChild(supernova);
+
+            setTimeout(() => supernova.remove(), 3000);
+        }
+
+        // Create supernova every 1-3 seconds
+        setInterval(createSupernova, 2000);
+        createSupernova();
+    </script>
+</body>
+
+</html>

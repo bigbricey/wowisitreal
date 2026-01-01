@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words Spoken Per Second (Global) | Wow Is It Real</title>
+    <meta name="description" content="16 billion words spoken every second. Humanity never stops talking.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Floating Words Effect */
+        body {
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+
+        .words-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-word {
+            position: absolute;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(100, 200, 150, 0.4);
+            white-space: nowrap;
+            animation: float-across 8s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes float-across {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        .main-counter {
+            color: #4ade80;
+            text-shadow:
+                0 0 30px rgba(74, 222, 128, 0.8),
+                0 0 60px rgba(74, 222, 128, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(74, 222, 128, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(74, 222, 128, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(74, 222, 128, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #4ade80;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: rgba(74, 222, 128, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(74, 222, 128, 0.3);
+            color: #fff;
+            border-color: rgba(74, 222, 128, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(74, 222, 128, 0.6);
+            color: #4ade80;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(74, 222, 128, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="words-container" id="words"></div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Words Spoken</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                16 billion words spoken every second across 7,000+ languages.
+                Conversations, arguments, confessions, jokes, lies, truths—
+                a cacophony of human connection flooding the air.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    The best words ever spoken, recorded for your ears.
+                    Stories that change how you see the world.
+                </p>
+                <a href="../../go/audible.html">Listen on Audible →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        const counter = new LiveCounter('main-counter', 0, 16000000000);
+        counter.start();
+
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        const container = document.getElementById('words');
+        const words = [
+            'hello', 'love', 'help', 'yes', 'no', 'wait',
+            'sorry', 'thanks', 'why', 'how', 'what',
+            '你好', 'hola', 'مرحبا', 'привет', 'olá',
+            'こんにちは', 'bonjour', 'ciao', 'hallo', 'merhaba'
+        ];
+
+        function createWord() {
+            const word = document.createElement('div');
+            word.className = 'floating-word';
+            word.textContent = words[Math.floor(Math.random() * words.length)];
+            word.style.top = Math.random() * 90 + '%';
+            word.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            word.style.fontSize = (Math.random() * 0.6 + 0.8) + 'rem';
+
+            container.appendChild(word);
+            setTimeout(() => word.remove(), 10000);
+        }
+
+        setInterval(createWord, 300);
+        for (let i = 0; i < 10; i++) setTimeout(createWord, i * 200);
+    </script>
+</body>
+
+</html>

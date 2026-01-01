@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Streams Per Second | Wow Is It Real</title>
+    <meta name="description"
+        content="46,000 songs are streamed on Spotify every second. The world's playlist is always playing.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Audio Visualizer / Spectrogram Effect */
+        body {
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+
+        #visualizer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            z-index: -1;
+        }
+
+        .spotify-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 100%, rgba(30, 215, 96, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .main-counter {
+            color: #1ed760;
+            text-shadow:
+                0 0 30px rgba(30, 215, 96, 0.8),
+                0 0 60px rgba(30, 215, 96, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(30, 215, 96, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(30, 215, 96, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(30, 215, 96, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #1ed760;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(30, 215, 96, 0.1);
+            border: 1px solid rgba(30, 215, 96, 0.3);
+            color: rgba(30, 215, 96, 0.8);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #1ed760;
+            color: #000;
+            border-color: #1ed760;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #1ed760;
+            color: #1ed760;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(30, 215, 96, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: #1ed760;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="spotify-glow"></div>
+    <canvas id="visualizer"></canvas>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Spotify Streams</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                The world's jukebox never stops. 46,000 songs stream every second.
+                4 billion per day. Right now, someone is hearing their new favorite
+                song for the first time. Someone else is replaying heartbreak.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Discover the stories behind the music. Great audiobooks
+                    about artists, producers, and the industry.
+                </p>
+                <a href="../../go/audible.html">Listen on Audible →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 46000);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Audio Visualizer Effect
+        const canvas = document.getElementById('visualizer');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const bars = 64;
+        const barHeights = new Array(bars).fill(0);
+        const targetHeights = new Array(bars).fill(0);
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight * 0.4;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function updateBars() {
+            for (let i = 0; i < bars; i++) {
+                // Simulate audio frequencies with noise
+                if (Math.random() > 0.7) {
+                    targetHeights[i] = Math.random() * height * 0.8;
+                }
+                // Smooth interpolation
+                barHeights[i] += (targetHeights[i] - barHeights[i]) * 0.1;
+                // Decay
+                targetHeights[i] *= 0.95;
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            const barWidth = width / bars;
+            const gap = 2;
+
+            for (let i = 0; i < bars; i++) {
+                const x = i * barWidth;
+                const barH = barHeights[i];
+
+                // Gradient from bottom
+                const gradient = ctx.createLinearGradient(0, height, 0, height - barH);
+                gradient.addColorStop(0, 'rgba(30, 215, 96, 0.8)');
+                gradient.addColorStop(0.5, 'rgba(30, 215, 96, 0.4)');
+                gradient.addColorStop(1, 'rgba(30, 215, 96, 0.1)');
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x + gap / 2, height - barH, barWidth - gap, barH);
+            }
+
+            updateBars();
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+
+</html>

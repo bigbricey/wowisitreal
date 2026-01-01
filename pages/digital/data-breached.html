@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Breached Per Second | Wow Is It Real</title>
+    <meta name="description"
+        content="127 data records are breached every second. Your information is under constant siege.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Matrix Rain Effect */
+        body {
+            background: #000;
+            overflow: hidden;
+        }
+
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .breach-alert {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            padding: 12px 20px;
+            background: rgba(255, 0, 50, 0.2);
+            border: 1px solid rgba(255, 0, 50, 0.5);
+            border-radius: 6px;
+            color: #ff0032;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            animation: alert-blink 1s ease-in-out infinite;
+            z-index: 100;
+        }
+
+        @keyframes alert-blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .main-counter {
+            color: #ff0032;
+            text-shadow:
+                0 0 30px rgba(255, 0, 50, 0.8),
+                0 0 60px rgba(255, 0, 50, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(255, 0, 50, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(255, 100, 100, 0.7);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 0, 50, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #ff0032;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 0, 50, 0.1);
+            border: 1px solid rgba(255, 0, 50, 0.3);
+            color: rgba(255, 0, 50, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 0, 50, 0.3);
+            color: #fff;
+            border-color: rgba(255, 0, 50, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(255, 0, 50, 0.6);
+            color: #ff0032;
+        }
+
+        .affiliate-bridge {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 0, 50, 0.3);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #5865f2, #00d4ff);
+        }
+
+        .affiliate-bridge .offer-text {
+            color: rgba(255, 200, 200, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="breach-alert">⚠ ACTIVE THREATS DETECTED</div>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Data Records Breached</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                127 personal records are stolen every second. Emails, passwords,
+                credit cards, social security numbers. 4 billion per year.
+                Your data is a commodity. Someone is buying it right now.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// PROTECTION TOOL</div>
+                <p class="offer-text">
+                    Encrypt your connection. Hide your IP. Stop being a target.
+                    Take back your digital privacy.
+                </p>
+                <a href="../../go/vpn.html">Get NordVPN →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 127);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const fontSize = 14;
+        let columns;
+        const drops = [];
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]|;:<>?~`';
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            columns = Math.floor(width / fontSize);
+
+            for (let i = drops.length; i < columns; i++) {
+                drops[i] = Math.random() * height / fontSize;
+            }
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function draw() {
+            // Black with opacity for fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = '#ff0032';
+            ctx.font = fontSize + 'px JetBrains Mono';
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Vary the brightness
+                const brightness = Math.random();
+                if (brightness > 0.95) {
+                    ctx.fillStyle = '#fff';
+                } else if (brightness > 0.8) {
+                    ctx.fillStyle = '#ff6666';
+                } else {
+                    ctx.fillStyle = '#ff0032';
+                }
+
+                ctx.fillText(char, x, y);
+
+                if (y > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+
+</html>

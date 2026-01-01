@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stars Born Per Day | Wow Is It Real</title>
+    <meta name="description" content="275 million stars are born per day across the universe. Creation never stops.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Star Birth / Nebula Effect */
+        body {
+            background: #050510;
+            overflow: hidden;
+        }
+
+        #star-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .nebula-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -2;
+        }
+
+        .nebula-1 {
+            top: 20%;
+            left: 10%;
+            background: radial-gradient(circle, #ff6b6b, transparent);
+        }
+
+        .nebula-2 {
+            bottom: 20%;
+            right: 10%;
+            background: radial-gradient(circle, #4facfe, transparent);
+        }
+
+        .nebula-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #c471ed, transparent);
+        }
+
+        .main-counter {
+            color: #fcd34d;
+            text-shadow:
+                0 0 30px rgba(252, 211, 77, 0.8),
+                0 0 60px rgba(252, 211, 77, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(252, 211, 77, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(252, 211, 77, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(252, 211, 77, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #fcd34d;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(252, 211, 77, 0.1);
+            border: 1px solid rgba(252, 211, 77, 0.3);
+            color: rgba(252, 211, 77, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: rgba(252, 211, 77, 0.3);
+            color: #fff;
+            border-color: rgba(252, 211, 77, 0.6);
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: rgba(252, 211, 77, 0.6);
+            color: #fcd34d;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(252, 211, 77, 0.2);
+        }
+
+        .affiliate-bridge a {
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <div class="nebula-glow nebula-1"></div>
+    <div class="nebula-glow nebula-2"></div>
+    <div class="nebula-glow nebula-3"></div>
+    <canvas id="star-canvas"></canvas>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Stars Born Today</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                275 million stars born per day across the observable universe.
+                Inside nebulae light-years away, gravity pulls hydrogen together
+                until fusion ignites. New suns. New possibilities for worlds.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// CURATED TOOL</div>
+                <p class="offer-text">
+                    Watch stunning documentaries about stellar formation
+                    and the birth of solar systems.
+                </p>
+                <a href="../../go/curiosity.html">Watch on CuriosityStream →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // ~3,180 per second
+        const counter = new LiveCounter('main-counter', 0, 3180);
+        counter.start();
+
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Star birth animation
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const stars = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = 0;
+                this.maxSize = Math.random() * 3 + 1;
+                this.growing = true;
+                this.growSpeed = Math.random() * 0.02 + 0.01;
+                this.brightness = Math.random();
+            }
+
+            update() {
+                if (this.growing) {
+                    this.size += this.growSpeed;
+                    if (this.size >= this.maxSize) {
+                        this.growing = false;
+                    }
+                } else {
+                    this.brightness -= 0.01;
+                    if (this.brightness <= 0) {
+                        this.reset();
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(252, 211, 77, ${this.brightness})`;
+                ctx.fill();
+
+                // Glow
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(252, 211, 77, ${this.brightness * 0.3})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            const star = new Star();
+            star.size = Math.random() * star.maxSize;
+            stars.push(star);
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(5, 5, 16, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

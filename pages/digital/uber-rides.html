@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Rides Per Second | Wow Is It Real</title>
+    <meta name="description" content="232 Uber rides start every second. The world is always going somewhere.">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* GPS Route Lines Effect */
+        body {
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+
+        #route-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .uber-pin {
+            position: fixed;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            animation: pin-bounce 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pin-bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .main-counter {
+            color: #fff;
+            text-shadow:
+                0 0 30px rgba(255, 255, 255, 0.5);
+            font-size: clamp(2rem, 10vw, 5rem);
+        }
+
+        .counter-title {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .counter-context {
+            color: rgba(200, 200, 200, 0.6);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgba(200, 200, 200, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mode-btn.active {
+            background: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .affiliate-bridge {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .affiliate-bridge a {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">← Back to All Stats</a>
+
+    <canvas id="route-canvas"></canvas>
+    <div class="uber-pin">📍</div>
+
+    <div class="counter-page">
+        <div class="counter-container">
+            <h1 class="counter-title">Uber Rides</h1>
+
+            <div class="toggle-container">
+                <button class="mode-btn active" id="mode-session">Since You Arrived</button>
+                <button class="mode-btn" id="mode-rate">Per Second</button>
+            </div>
+
+            <div class="main-counter" id="main-counter">0</div>
+
+            <p class="counter-context">
+                232 Uber rides start every second. 20 million per day.
+                First dates, airport runs, late-night escapes—
+                humanity in perpetual motion, rated 4.9 stars.
+            </p>
+
+            <!-- Affiliate Bridge -->
+            <div class="affiliate-bridge">
+                <div class="powered-by">// PROTECTION TOOL</div>
+                <p class="offer-text">
+                    Ride-share apps track your every move.
+                    Protect your location data with a VPN.
+                </p>
+                <a href="../../go/vpn.html">Get NordVPN →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/counter.js"></script>
+    <script>
+        // Initialize the main counter
+        const counter = new LiveCounter('main-counter', 0, 232);
+        counter.start();
+
+        // Mode toggle
+        const sessionBtn = document.getElementById('mode-session');
+        const rateBtn = document.getElementById('mode-rate');
+
+        sessionBtn.addEventListener('click', () => {
+            counter.setMode('session');
+            sessionBtn.classList.add('active');
+            rateBtn.classList.remove('active');
+        });
+
+        rateBtn.addEventListener('click', () => {
+            counter.setMode('rate');
+            rateBtn.classList.add('active');
+            sessionBtn.classList.remove('active');
+        });
+
+        // Route lines effect
+        const canvas = document.getElementById('route-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const routes = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Route {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.startX = Math.random() * width;
+                this.startY = Math.random() * height;
+                this.endX = Math.random() * width;
+                this.endY = Math.random() * height;
+                this.progress = 0;
+                this.speed = Math.random() * 0.02 + 0.01;
+                this.alpha = Math.random() * 0.3 + 0.1;
+            }
+
+            update() {
+                this.progress += this.speed;
+                if (this.progress >= 1) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                const x = this.startX + (this.endX - this.startX) * this.progress;
+                const y = this.startY + (this.endY - this.startY) * this.progress;
+
+                // Draw route line
+                ctx.beginPath();
+                ctx.moveTo(this.startX, this.startY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = `rgba(100, 150, 255, ${this.alpha * 0.5})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw car dot
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha + 0.3})`;
+                ctx.fill();
+            }
+        }
+
+        // Initialize routes
+        for (let i = 0; i < 20; i++) {
+            const route = new Route();
+            route.progress = Math.random();
+            routes.push(route);
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            routes.forEach(route => {
+                route.update();
+                route.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>
