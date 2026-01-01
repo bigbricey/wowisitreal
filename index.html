@@ -418,27 +418,27 @@
         }
 
         /* Category-specific card colors */
+        #velocity .counter-card {
+            --card-glow: rgba(139, 92, 246, 0.5);
+            --card-shadow: rgba(139, 92, 246, 0.1);
+        }
+
         #money .counter-card {
             --card-glow: rgba(251, 191, 36, 0.5);
             --card-shadow: rgba(251, 191, 36, 0.1);
         }
 
-        #digital .counter-card {
+        #hivemind .counter-card {
             --card-glow: rgba(59, 130, 246, 0.5);
             --card-shadow: rgba(59, 130, 246, 0.1);
         }
 
-        #cosmic .counter-card {
-            --card-glow: rgba(139, 92, 246, 0.5);
-            --card-shadow: rgba(139, 92, 246, 0.1);
-        }
-
-        #human .counter-card {
+        #machine .counter-card {
             --card-glow: rgba(236, 72, 153, 0.5);
             --card-shadow: rgba(236, 72, 153, 0.1);
         }
 
-        #food .counter-card {
+        #binge .counter-card {
             --card-glow: rgba(249, 115, 22, 0.5);
             --card-shadow: rgba(249, 115, 22, 0.1);
         }
@@ -514,18 +514,18 @@
     <nav class="main-nav">
         <a href="/" class="logo">WOW<span>ISITREAL</span></a>
         <div class="nav-links">
-            <a href="#money">💰 Money</a>
-            <a href="#digital">📱 Digital</a>
-            <a href="#cosmic">🌌 Cosmic</a>
-            <a href="#human">❤️ Human</a>
-            <a href="#food">🍔 Food</a>
+            <a href="#velocity">🚀 Velocity</a>
+            <a href="#money">💸 Money</a>
+            <a href="#hivemind">🧠 Hive Mind</a>
+            <a href="#machine">❤️ Machine</a>
+            <a href="#binge">🍿 Binge</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header class="hero">
         <h1>The World is Moving.<br><span class="highlight">Can You Keep Up?</span></h1>
-        <p class="tagline">55 mind-blowing live statistics. Each one a unique visual experience.</p>
+        <p class="tagline">Mind-blowing live statistics. Each one a unique visual experience.</p>
 
         <!-- Multi-Counter Showcase -->
         <div class="counter-showcase">
@@ -546,7 +546,7 @@
             </div>
         </div>
 
-        <a href="#money" class="cta-button">Explore All 55 Stats ↓</a>
+        <a href="#velocity" class="cta-button">Explore All Stats ↓</a>
 
         <div class="scroll-indicator">
             <span></span>
@@ -555,186 +555,34 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Money Category -->
-        <section id="money" class="category">
-            <h2>💰 Extreme Wealth & Money</h2>
-            <p class="category-desc">The numbers move so fast they blur.</p>
-            <div class="counter-grid">
-                <a href="pages/money/elon-wealth.html" class="counter-card">
-                    <span class="card-hook">How much has Elon Musk made since you got here?</span>
-                    <span class="card-hint">Click to find out →</span>
-                </a>
-                <a href="pages/money/nvidia-revenue.html" class="counter-card">
-                    <span class="card-hook">NVIDIA prints money faster than the US Mint</span>
-                    <span class="card-hint">See it happen in real-time →</span>
-                </a>
-                <a href="pages/money/amazon-revenue.html" class="counter-card">
-                    <span class="card-hook">Every second you wait, Amazon makes enough to buy a car</span>
-                    <span class="card-hint">Watch the counter climb →</span>
-                </a>
-                <a href="pages/money/google-revenue.html" class="counter-card">
-                    <span class="card-hook">Google earns more per second than most make in a year</span>
-                    <span class="card-hint">See the insane numbers →</span>
-                </a>
-                <a href="pages/money/apple-revenue.html" class="counter-card">
-                    <span class="card-hook">Apple's revenue per second is almost art</span>
-                    <span class="card-hint">Experience the minimalist money →</span>
-                </a>
-                <a href="pages/money/microsoft-revenue.html" class="counter-card">
-                    <span class="card-hook">The cloud is raining cash for Microsoft</span>
-                    <span class="card-hint">Watch it pour →</span>
-                </a>
-                <a href="pages/money/bitcoin-transactions.html" class="counter-card">
-                    <span class="card-hook">Billions in crypto moves every minute</span>
-                    <span class="card-hint">See the blockchain pulse →</span>
-                </a>
-                <a href="pages/money/world-debt.html" class="counter-card">
-                    <span class="card-hook">The world goes deeper into debt every second</span>
-                    <span class="card-hint">Watch it grow (terrifying) →</span>
-                </a>
-                <a href="pages/money/credit-cards.html" class="counter-card">
-                    <span class="card-hook">How many credit cards swiped while you read this?</span>
-                    <span class="card-hint">Click to see →</span>
-                </a>
-                <a href="pages/money/gambling-losses.html" class="counter-card">
-                    <span class="card-hook">The house always wins. How much since you clicked?</span>
-                    <span class="card-hint">See the losses pile up →</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Digital Category -->
-        <section id="digital" class="category">
-            <h2>📱 The Digital Pulse</h2>
-            <p class="category-desc">The internet moves faster than the human brain.</p>
-            <div class="counter-grid">
-                <a href="pages/digital/google-searches.html" class="counter-card">
-                    <span class="card-hook">What is everyone searching for right now?</span>
-                    <span class="card-hint">105,000 per second →</span>
-                </a>
-                <a href="pages/digital/chatgpt-prompts.html" class="counter-card">
-                    <span class="card-hook">AI is being asked thousands of questions per second</span>
-                    <span class="card-hint">Watch the prompts fly →</span>
-                </a>
-                <a href="pages/digital/tinder-swipes.html" class="counter-card">
-                    <span class="card-hook">How many people just swiped left or right?</span>
-                    <span class="card-hint">Love (or not) in real-time →</span>
-                </a>
-                <a href="pages/digital/spotify-streams.html" class="counter-card">
-                    <span class="card-hook">The world is listening. What's the count now?</span>
-                    <span class="card-hint">See the audio visualizer →</span>
-                </a>
-                <a href="pages/digital/youtube-hours.html" class="counter-card">
-                    <span class="card-hook">How many hours of YouTube watched since you got here?</span>
-                    <span class="card-hint">It's more than you think →</span>
-                </a>
-                <a href="pages/digital/netflix-hours.html" class="counter-card">
-                    <span class="card-hook">Netflix & chill is a global phenomenon</span>
-                    <span class="card-hint">See the hours rack up →</span>
-                </a>
-                <a href="pages/digital/instagram-photos.html" class="counter-card">
-                    <span class="card-hook">How many selfies just got posted?</span>
-                    <span class="card-hint">Watch them pop →</span>
-                </a>
-                <a href="pages/digital/tweets-posted.html" class="counter-card">
-                    <span class="card-hook">X/Twitter never sleeps. See the flood.</span>
-                    <span class="card-hint">Watch the tweets stream →</span>
-                </a>
-                <a href="pages/digital/tiktok-videos.html" class="counter-card">
-                    <span class="card-hook">TikTok is infinite. Here's the proof.</span>
-                    <span class="card-hint">See the endless scroll →</span>
-                </a>
-                <a href="pages/digital/emails-sent.html" class="counter-card">
-                    <span class="card-hook">Your inbox is the least of it</span>
-                    <span class="card-hint">Millions per second →</span>
-                </a>
-                <a href="pages/digital/data-breached.html" class="counter-card">
-                    <span class="card-hook">How many records were just stolen?</span>
-                    <span class="card-hint">The red numbers are scary →</span>
-                </a>
-                <a href="pages/digital/website-hacks.html" class="counter-card">
-                    <span class="card-hook">Hackers are working right now</span>
-                    <span class="card-hint">Watch the terminal →</span>
-                </a>
-                <a href="pages/digital/whatsapp-messages.html" class="counter-card">
-                    <span class="card-hook">The world is texting. Non-stop.</span>
-                    <span class="card-hint">See the chat bubbles →</span>
-                </a>
-                <a href="pages/digital/uber-rides.html" class="counter-card">
-                    <span class="card-hook">How many Ubers are driving right now?</span>
-                    <span class="card-hint">See the GPS routes →</span>
-                </a>
-                <a href="pages/digital/packages-shipped.html" class="counter-card">
-                    <span class="card-hook">The cardboard never stops</span>
-                    <span class="card-hint">Watch packages fly →</span>
-                </a>
-                <a href="pages/digital/photos-taken.html" class="counter-card">
-                    <span class="card-hook">Say cheese! How many photos since you arrived?</span>
-                    <span class="card-hint">Flash! →</span>
-                </a>
-                <a href="pages/digital/adult-visits.html" class="counter-card">
-                    <span class="card-hook">The internet's open secret</span>
-                    <span class="card-hint">Incognito mode on →</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Cosmic Category -->
-        <section id="cosmic" class="category">
-            <h2>🌌 Cosmic & Planetary</h2>
-            <p class="category-desc">Stats that make you feel tiny.</p>
+        <!-- VELOCITY: Speed & Space (Wonder only, no doom) -->
+        <section id="velocity" class="category">
+            <h2>🚀 VELOCITY</h2>
+            <p class="category-desc">Speed, space, and pure wonder.</p>
             <div class="counter-grid">
                 <a href="pages/cosmic/voyager-distance.html" class="counter-card">
                     <span class="card-hook">Voyager 1 just got farther away while you read this</span>
-                    <span class="card-hint">Into the void →</span>
-                </a>
-                <a href="pages/cosmic/stars-born.html" class="counter-card">
-                    <span class="card-hook">A star was just born. And another. And another.</span>
-                    <span class="card-hint">Watch creation happen →</span>
-                </a>
-                <a href="pages/cosmic/stars-dying.html" class="counter-card">
-                    <span class="card-hook">Stars are dying right now. Supernovas in real-time.</span>
-                    <span class="card-hint">Watch them explode →</span>
-                </a>
-                <a href="pages/cosmic/lightning-strikes.html" class="counter-card">
-                    <span class="card-hook">Lightning just struck 45 times while you read this</span>
-                    <span class="card-hint">Feel the thunder →</span>
-                </a>
-                <a href="pages/cosmic/meteors.html" class="counter-card">
-                    <span class="card-hook">How many space rocks just hit Earth?</span>
-                    <span class="card-hint">More than you think →</span>
-                </a>
-                <a href="pages/cosmic/iss-speed.html" class="counter-card">
-                    <span class="card-hook">The ISS just flew over a whole country</span>
-                    <span class="card-hint">Track its speed →</span>
+                    <span class="card-hint">Escaping the solar system →</span>
                 </a>
                 <a href="pages/cosmic/earth-orbit.html" class="counter-card">
                     <span class="card-hook">You just traveled 30km through space</span>
                     <span class="card-hint">Earth never stops moving →</span>
                 </a>
-                <a href="pages/cosmic/trees-cut.html" class="counter-card">
-                    <span class="card-hook">How many trees fell since you got here?</span>
-                    <span class="card-hint">Watch the forest disappear →</span>
+                <a href="pages/cosmic/stars-born.html" class="counter-card">
+                    <span class="card-hook">A star was just born. And another. And another.</span>
+                    <span class="card-hint">Watch creation happen →</span>
                 </a>
-                <a href="pages/cosmic/co2-emitted.html" class="counter-card">
-                    <span class="card-hook">The air is changing. Right now.</span>
-                    <span class="card-hint">See the smoke rise →</span>
+                <a href="pages/cosmic/iss-speed.html" class="counter-card">
+                    <span class="card-hook">The ISS just flew over a whole country</span>
+                    <span class="card-hint">Speed run around Earth →</span>
                 </a>
-                <a href="pages/cosmic/ice-melting.html" class="counter-card">
-                    <span class="card-hook">The glaciers are dripping away</span>
-                    <span class="card-hint">Watch the melt →</span>
+                <a href="pages/cosmic/lightning-strikes.html" class="counter-card">
+                    <span class="card-hook">Lightning just struck 45 times while you read this</span>
+                    <span class="card-hint">Feel the power →</span>
                 </a>
-                <a href="pages/cosmic/plastic-produced.html" class="counter-card">
-                    <span class="card-hook">More plastic was just made. Where does it go?</span>
-                    <span class="card-hint">See the ocean debris →</span>
-                </a>
-                <a href="pages/cosmic/oil-consumed.html" class="counter-card">
-                    <span class="card-hook">Black gold, burning fast</span>
-                    <span class="card-hint">Watch it drip →</span>
-                </a>
-                <a href="pages/cosmic/species-extinct.html" class="counter-card">
-                    <span class="card-hook">Another species may have just gone extinct</span>
-                    <span class="card-hint">The silence grows →</span>
+                <a href="pages/cosmic/meteors.html" class="counter-card">
+                    <span class="card-hook">Shooting stars are raining down right now</span>
+                    <span class="card-hint">Meteors entering atmosphere →</span>
                 </a>
                 <a href="pages/cosmic/solar-energy.html" class="counter-card">
                     <span class="card-hook">The sun is gifting us unlimited power</span>
@@ -747,42 +595,114 @@
             </div>
         </section>
 
-        <!-- Human Category -->
-        <section id="human" class="category">
-            <h2>❤️ The Human Machine</h2>
-            <p class="category-desc">We are 8 billion biological engines.</p>
+        <!-- THE MONEY PRINTER: Wealth -->
+        <section id="money" class="category">
+            <h2>💸 THE MONEY PRINTER</h2>
+            <p class="category-desc">The insane speed of earning.</p>
+            <div class="counter-grid">
+                <a href="pages/money/elon-wealth.html" class="counter-card">
+                    <span class="card-hook">How much has Elon Musk made since you got here?</span>
+                    <span class="card-hint">The hook →</span>
+                </a>
+                <a href="pages/money/nvidia-revenue.html" class="counter-card">
+                    <span class="card-hook">NVIDIA prints money faster than the US Mint</span>
+                    <span class="card-hint">The current king →</span>
+                </a>
+                <a href="pages/money/amazon-revenue.html" class="counter-card">
+                    <span class="card-hook">Every second you wait, Amazon makes enough to buy a car</span>
+                    <span class="card-hint">Watch the counter climb →</span>
+                </a>
+                <a href="pages/money/google-revenue.html" class="counter-card">
+                    <span class="card-hook">Google earns more per second than most make in a year</span>
+                    <span class="card-hint">See the insane numbers →</span>
+                </a>
+                <a href="pages/money/apple-revenue.html" class="counter-card">
+                    <span class="card-hook">Apple's revenue per second is almost art</span>
+                    <span class="card-hint">Minimalist money →</span>
+                </a>
+                <a href="pages/money/microsoft-revenue.html" class="counter-card">
+                    <span class="card-hook">The cloud is raining cash for Microsoft</span>
+                    <span class="card-hint">Watch it pour →</span>
+                </a>
+                <a href="pages/money/bitcoin-transactions.html" class="counter-card">
+                    <span class="card-hook">Billions in crypto moves every minute</span>
+                    <span class="card-hint">High energy →</span>
+                </a>
+                <a href="pages/money/gambling-losses.html" class="counter-card">
+                    <span class="card-hook">How much is being wagered on sports right now?</span>
+                    <span class="card-hint">The action never stops →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- THE HIVE MIND: Digital -->
+        <section id="hivemind" class="category">
+            <h2>🧠 THE HIVE MIND</h2>
+            <p class="category-desc">The apps we're all addicted to.</p>
+            <div class="counter-grid">
+                <a href="pages/digital/chatgpt-prompts.html" class="counter-card">
+                    <span class="card-hook">AI is being asked thousands of questions per second</span>
+                    <span class="card-hint">The AI revolution →</span>
+                </a>
+                <a href="pages/digital/tiktok-videos.html" class="counter-card">
+                    <span class="card-hook">TikTok is infinite. Here's the proof.</span>
+                    <span class="card-hint">Relatable addiction →</span>
+                </a>
+                <a href="pages/digital/tinder-swipes.html" class="counter-card">
+                    <span class="card-hook">How many people just swiped left or right?</span>
+                    <span class="card-hint">Romance in real-time →</span>
+                </a>
+                <a href="pages/digital/whatsapp-messages.html" class="counter-card">
+                    <span class="card-hook">The world is texting. Non-stop.</span>
+                    <span class="card-hint">Global chatter →</span>
+                </a>
+                <a href="pages/digital/spotify-streams.html" class="counter-card">
+                    <span class="card-hook">The world is listening. What's the count now?</span>
+                    <span class="card-hint">Music never stops →</span>
+                </a>
+                <a href="pages/digital/google-searches.html" class="counter-card">
+                    <span class="card-hook">What is everyone searching for right now?</span>
+                    <span class="card-hint">Curiosity unleashed →</span>
+                </a>
+                <a href="pages/digital/uber-rides.html" class="counter-card">
+                    <span class="card-hook">How many Ubers are driving right now?</span>
+                    <span class="card-hint">Movement everywhere →</span>
+                </a>
+                <a href="pages/digital/youtube-hours.html" class="counter-card">
+                    <span class="card-hook">How many hours of YouTube watched since you got here?</span>
+                    <span class="card-hint">It's more than you think →</span>
+                </a>
+                <a href="pages/digital/instagram-photos.html" class="counter-card">
+                    <span class="card-hook">How many selfies just got posted?</span>
+                    <span class="card-hint">Watch them pop →</span>
+                </a>
+                <a href="pages/digital/netflix-hours.html" class="counter-card">
+                    <span class="card-hook">Netflix & chill is a global phenomenon</span>
+                    <span class="card-hint">See the hours rack up →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- THE MACHINE: Biology (Vitality, no death) -->
+        <section id="machine" class="category">
+            <h2>❤️ THE MACHINE</h2>
+            <p class="category-desc">8 billion biological engines running right now.</p>
             <div class="counter-grid">
                 <a href="pages/human/heartbeats.html" class="counter-card">
                     <span class="card-hook">Your heart just beat. So did 8 billion others.</span>
-                    <span class="card-hint">Feel the global pulse →</span>
+                    <span class="card-hint">Feel the rhythm →</span>
                 </a>
                 <a href="pages/human/babies-born.html" class="counter-card">
                     <span class="card-hook">A baby was just born. Welcome to Earth, little one.</span>
-                    <span class="card-hint">See the new arrivals →</span>
-                </a>
-                <a href="pages/human/deaths.html" class="counter-card">
-                    <span class="card-hook">Someone just said their last goodbye</span>
-                    <span class="card-hint">The hourglass runs out →</span>
-                </a>
-                <a href="pages/human/breaths.html" class="counter-card">
-                    <span class="card-hook">You just took a breath. So did everyone.</span>
-                    <span class="card-hint">Breathe with the world →</span>
+                    <span class="card-hint">New life arriving →</span>
                 </a>
                 <a href="pages/human/eye-blinks.html" class="counter-card">
                     <span class="card-hook">Blink. Everyone just did.</span>
                     <span class="card-hint">Watch the eyes →</span>
                 </a>
-                <a href="pages/human/thoughts.html" class="counter-card">
-                    <span class="card-hook">Billions of thoughts firing right now</span>
-                    <span class="card-hint">See the neural network →</span>
-                </a>
-                <a href="pages/human/cells-dying.html" class="counter-card">
-                    <span class="card-hook">Millions of your cells just died (it's okay)</span>
-                    <span class="card-hint">Watch the microscopic dance →</span>
-                </a>
-                <a href="pages/human/dreams.html" class="counter-card">
-                    <span class="card-hook">2 billion people are dreaming right now</span>
-                    <span class="card-hint">Where are they? →</span>
+                <a href="pages/human/breaths.html" class="counter-card">
+                    <span class="card-hook">You just took a breath. So did everyone.</span>
+                    <span class="card-hint">Breathe with the world →</span>
                 </a>
                 <a href="pages/human/words-spoken.html" class="counter-card">
                     <span class="card-hook">The world never shuts up</span>
@@ -791,22 +711,26 @@
             </div>
         </section>
 
-        <!-- Food Category -->
-        <section id="food" class="category">
-            <h2>🍔 Food & Consumption</h2>
-            <p class="category-desc">Humanity is always hungry.</p>
+        <!-- THE BINGE: Consumption -->
+        <section id="binge" class="category">
+            <h2>🍿 THE BINGE</h2>
+            <p class="category-desc">Everything we consume, delivered, and devour.</p>
             <div class="counter-grid">
-                <a href="pages/food/coffee-consumed.html" class="counter-card">
-                    <span class="card-hook">How many cups of coffee since you got here?</span>
-                    <span class="card-hint">Smell the steam →</span>
-                </a>
                 <a href="pages/food/pizza-eaten.html" class="counter-card">
                     <span class="card-hook">Pizza slices just disappeared worldwide</span>
                     <span class="card-hint">Watch them vanish →</span>
                 </a>
                 <a href="pages/food/hamburgers-eaten.html" class="counter-card">
                     <span class="card-hook">Burgers. So many burgers.</span>
-                    <span class="card-hint">See them fall →</span>
+                    <span class="card-hint">McDonald's never sleeps →</span>
+                </a>
+                <a href="pages/food/coffee-consumed.html" class="counter-card">
+                    <span class="card-hook">How many cups of coffee since you got here?</span>
+                    <span class="card-hint">Fuel the world →</span>
+                </a>
+                <a href="pages/digital/packages-shipped.html" class="counter-card">
+                    <span class="card-hook">The cardboard never stops</span>
+                    <span class="card-hint">Amazon packages delivered →</span>
                 </a>
                 <a href="pages/food/water-drunk.html" class="counter-card">
                     <span class="card-hook">The world is thirsty. Always.</span>
@@ -846,7 +770,7 @@
             stars.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                z: Math.random() * 3 + 1, // depth
+                z: Math.random() * 3 + 1,
                 size: Math.random() * 2 + 0.5,
                 twinkle: Math.random() * Math.PI * 2
             });
@@ -863,15 +787,12 @@
             ctx.fillRect(0, 0, width, height);
 
             stars.forEach(star => {
-                // Parallax effect
                 const parallaxX = mouseX * star.z * 0.5;
                 const parallaxY = mouseY * star.z * 0.5;
 
-                // Twinkle
                 star.twinkle += 0.02;
                 const twinkleFactor = (Math.sin(star.twinkle) + 1) / 2 * 0.5 + 0.5;
 
-                // Draw star
                 ctx.beginPath();
                 ctx.arc(
                     star.x + parallaxX,
@@ -883,7 +804,6 @@
                 ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + twinkleFactor * 0.5})`;
                 ctx.fill();
 
-                // Slow drift
                 star.y += 0.1 / star.z;
                 if (star.y > height + 10) {
                     star.y = -10;
