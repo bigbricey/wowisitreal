@@ -1,71 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wow Is It Real? | Mind-Blowing Live Statistics</title>
-    <meta name="description" content="Watch the world change in real-time. Mind-blowing live counters for everything from Google searches to stars being born.">
+    <meta name="description"
+        content="Watch the world change in real-time. Mind-blowing live counters for everything from Google searches to stars being born.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        /* Enhanced card styles for intrigue */
+        /* ========== COMMAND CENTER HOMEPAGE ========== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0f;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Starfield Canvas */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(74, 222, 128, 0.3);
+            border-radius: 50%;
+            animation: float-up 15s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10, 10, 15, 0.9) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-green, #4ade80);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(74, 222, 128, 0.3),
+                    0 0 40px rgba(74, 222, 128, 0.1);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(74, 222, 128, 0.5),
+                    0 0 80px rgba(74, 222, 128, 0.2);
+            }
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #4ade80, #22d3ee, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+
+        /* Multi-Counter Display */
+        .counter-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .counter-showcase {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .showcase-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(74, 222, 128, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(74, 222, 128, 0.1);
+        }
+
+        .showcase-item:nth-child(1) {
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .showcase-item:nth-child(1):hover {
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .showcase-item:nth-child(2) {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .showcase-item:nth-child(2):hover {
+            border-color: rgba(236, 72, 153, 0.6);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.2);
+        }
+
+        .showcase-item:nth-child(3) {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .showcase-item:nth-child(3):hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .showcase-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .showcase-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .showcase-item:nth-child(1) .showcase-value {
+            color: #fbbf24;
+        }
+
+        .showcase-item:nth-child(2) .showcase-value {
+            color: #ec4899;
+        }
+
+        .showcase-item:nth-child(3) .showcase-value {
+            color: #3b82f6;
+        }
+
+        .showcase-unit {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.5);
+            border-radius: 50px;
+            color: #4ade80;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: rgba(74, 222, 128, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.2);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+        }
+
+        /* Main Content */
+        main {
+            padding: 0 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Category Sections */
+        .category {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fade-in-up 0.6s ease forwards;
+        }
+
+        .category:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .category:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .category:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .category:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .category:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-desc {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+        }
+
+        /* Counter Grid */
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Glassmorphism Cards */
         .counter-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 16px;
+            padding: 28px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .counter-card:hover::before {
+            opacity: 1;
         }
 
         .counter-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-green);
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.02);
+            border-color: var(--card-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 40px var(--card-shadow);
+        }
+
+        /* Category-specific card colors */
+        #money .counter-card {
+            --card-glow: rgba(251, 191, 36, 0.5);
+            --card-shadow: rgba(251, 191, 36, 0.1);
+        }
+
+        #digital .counter-card {
+            --card-glow: rgba(59, 130, 246, 0.5);
+            --card-shadow: rgba(59, 130, 246, 0.1);
+        }
+
+        #cosmic .counter-card {
+            --card-glow: rgba(139, 92, 246, 0.5);
+            --card-shadow: rgba(139, 92, 246, 0.1);
+        }
+
+        #human .counter-card {
+            --card-glow: rgba(236, 72, 153, 0.5);
+            --card-shadow: rgba(236, 72, 153, 0.1);
+        }
+
+        #food .counter-card {
+            --card-glow: rgba(249, 115, 22, 0.5);
+            --card-shadow: rgba(249, 115, 22, 0.1);
         }
 
         .card-hook {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.4;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
             font-weight: 500;
         }
 
         .card-hint {
             font-size: 0.85rem;
-            color: var(--accent-green);
-            opacity: 0.8;
+            color: var(--card-glow, rgba(74, 222, 128, 0.8));
             margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.3s;
         }
 
-        .counter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 24px;
+        .counter-card:hover .card-hint {
+            transform: translateX(4px);
         }
 
-        .category {
-            margin-bottom: 60px;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
         }
 
-        .category h2 {
-            font-size: 1.8rem;
+        .disclosure {
             margin-bottom: 8px;
+            font-size: 0.8rem;
         }
 
-        .category-desc {
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 24px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 0 20px 60px;
+            }
+
+            .category h2 {
+                font-size: 1.5rem;
+            }
+
+            .counter-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
+    <!-- Starfield Canvas -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
     <nav class="main-nav">
         <a href="/" class="logo">WOW<span>ISITREAL</span></a>
         <div class="nav-links">
@@ -73,25 +518,43 @@
             <a href="#digital">📱 Digital</a>
             <a href="#cosmic">🌌 Cosmic</a>
             <a href="#human">❤️ Human</a>
+            <a href="#food">🍔 Food</a>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <header class="hero">
-        <div class="hero-content">
-            <h1>The World is Moving.<br><span class="highlight">Can You Keep Up?</span></h1>
-            <p class="tagline">55 mind-blowing live statistics. Each one a unique visual experience.</p>
-            
-            <div class="featured-counter">
-                <div class="counter-label">Since you arrived, Google has processed</div>
-                <div class="counter-value" id="hero-counter">0</div>
-                <div class="counter-unit">searches</div>
-            </div>
+        <h1>The World is Moving.<br><span class="highlight">Can You Keep Up?</span></h1>
+        <p class="tagline">55 mind-blowing live statistics. Each one a unique visual experience.</p>
 
-            <a href="#explore" class="cta-button">Explore All Stats ↓</a>
+        <!-- Multi-Counter Showcase -->
+        <div class="counter-showcase">
+            <div class="showcase-item">
+                <div class="showcase-label">Elon Musk Made</div>
+                <div class="showcase-value" id="elon-counter">$0</div>
+                <div class="showcase-unit">since you arrived</div>
+            </div>
+            <div class="showcase-item">
+                <div class="showcase-label">Hearts Beating</div>
+                <div class="showcase-value" id="heart-counter">0</div>
+                <div class="showcase-unit">global heartbeats</div>
+            </div>
+            <div class="showcase-item">
+                <div class="showcase-label">Google Searches</div>
+                <div class="showcase-value" id="google-counter">0</div>
+                <div class="showcase-unit">questions asked</div>
+            </div>
+        </div>
+
+        <a href="#money" class="cta-button">Explore All 55 Stats ↓</a>
+
+        <div class="scroll-indicator">
+            <span></span>
         </div>
     </header>
 
-    <main id="explore">
+    <!-- Main Content -->
+    <main>
         <!-- Money Category -->
         <section id="money" class="category">
             <h2>💰 Extreme Wealth & Money</h2>
@@ -110,7 +573,7 @@
                     <span class="card-hint">Watch the counter climb →</span>
                 </a>
                 <a href="pages/money/google-revenue.html" class="counter-card">
-                    <span class="card-hook">Google earns more per second than most people make in a year</span>
+                    <span class="card-hook">Google earns more per second than most make in a year</span>
                     <span class="card-hint">See the insane numbers →</span>
                 </a>
                 <a href="pages/money/apple-revenue.html" class="counter-card">
@@ -147,7 +610,7 @@
             <div class="counter-grid">
                 <a href="pages/digital/google-searches.html" class="counter-card">
                     <span class="card-hook">What is everyone searching for right now?</span>
-                    <span class="card-hint">105,000 searches per second →</span>
+                    <span class="card-hint">105,000 per second →</span>
                 </a>
                 <a href="pages/digital/chatgpt-prompts.html" class="counter-card">
                     <span class="card-hook">AI is being asked thousands of questions per second</span>
@@ -353,16 +816,121 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p class="disclosure">This site contains affiliate links. We may earn a commission at no extra cost to you.</p>
         <p>&copy; 2025 WowIsItReal.com</p>
     </footer>
 
+    <!-- Scripts -->
     <script src="js/counter.js"></script>
     <script>
-        // Hero counter - Google Searches (105,000/sec)
-        const heroCounter = new LiveCounter('hero-counter', 0, 105000);
-        heroCounter.start();
+        // ========== STARFIELD ANIMATION ==========
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        const stars = [];
+        const numStars = 200;
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Create stars
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                z: Math.random() * 3 + 1, // depth
+                size: Math.random() * 2 + 0.5,
+                twinkle: Math.random() * Math.PI * 2
+            });
+        }
+
+        // Mouse parallax
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - width / 2) * 0.02;
+            mouseY = (e.clientY - height / 2) * 0.02;
+        });
+
+        function animateStars() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.3)';
+            ctx.fillRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                // Parallax effect
+                const parallaxX = mouseX * star.z * 0.5;
+                const parallaxY = mouseY * star.z * 0.5;
+
+                // Twinkle
+                star.twinkle += 0.02;
+                const twinkleFactor = (Math.sin(star.twinkle) + 1) / 2 * 0.5 + 0.5;
+
+                // Draw star
+                ctx.beginPath();
+                ctx.arc(
+                    star.x + parallaxX,
+                    star.y + parallaxY,
+                    star.size * twinkleFactor,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + twinkleFactor * 0.5})`;
+                ctx.fill();
+
+                // Slow drift
+                star.y += 0.1 / star.z;
+                if (star.y > height + 10) {
+                    star.y = -10;
+                    star.x = Math.random() * width;
+                }
+            });
+
+            requestAnimationFrame(animateStars);
+        }
+
+        animateStars();
+
+        // ========== FLOATING PARTICLES ==========
+        const particlesContainer = document.getElementById('particles');
+        const particleColors = ['#4ade80', '#22d3ee', '#a78bfa', '#fbbf24'];
+
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.background = particleColors[Math.floor(Math.random() * particleColors.length)];
+            particle.style.opacity = Math.random() * 0.3 + 0.1;
+            particlesContainer.appendChild(particle);
+        }
+
+        // ========== HERO COUNTERS ==========
+        const elonCounter = new LiveCounter('elon-counter', 0, 6800, { prefix: '$' });
+        const heartCounter = new LiveCounter('heart-counter', 0, 10600000000);
+        const googleCounter = new LiveCounter('google-counter', 0, 105000);
+
+        elonCounter.start();
+        heartCounter.start();
+        googleCounter.start();
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
+
 </html>
