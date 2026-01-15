@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wow Is It Real: High-Ticket Funnel Hub
 
-## Getting Started
+This is the 2026 rebirth of `wowisitreal.com`, rebuilt with Next.js 16, Tailwind CSS v4, and a high-performance scientific aesthetic.
 
-First, run the development server:
+## 🚀 Getting Started
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone & Install:**
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Environment Setup:**
+   Create a `.env.local` file and add your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Run Local Dev:**
+   ```bash
+   npm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Customization Guide
 
-## Learn More
+### 1. Swapping Affiliate Links
+All affiliate links for the "Oxygen Therapy" protocol are located in:
+`app/protocols/oxygen-therapy/page.tsx`
 
-To learn more about Next.js, take a look at the following resources:
+Update the `chambers` array or the "Check Price" buttons with your unique partner URLs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Updating the Protocol Content
+To add new protocols, create a new directory in `app/protocols/` and follow the `page.tsx` pattern established in the Oxygen Therapy folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Design System
+Styling is managed via **Tailwind CSS v4** variables in `app/globals.css`.
+- **Primary Navy:** `--primary-navy`
+- **Electric Blue:** `--electric-blue`
+- **Scientific Silver:** `--scientific-silver`
 
-## Deploy on Vercel
+## 📦 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is pre-configured for **Netlify**. 
+- Build Command: `npm run build`
+- Publish Directory: `.next`
+- Plugin: `@netlify/plugin-nextjs` (enabled in `netlify.toml`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+When you push to the `main` branch, Netlify will automatically trigger a production deploy.
+
+## ✅ Quality Standards
+- **SEO:** Built with semantic HTML and optimized meta tags.
+- **Performance:** Next.js static generation ensures lightning-fast load times.
+- **Accessibility:** High-contrast scientific palette and ARIA-compliant components.
