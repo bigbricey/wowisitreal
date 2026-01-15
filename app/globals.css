@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #010B13;
+  --foreground: #F8F9FA;
+  --primary-navy: #010B13;
+  --electric-blue: #40E0D0;
+  --electric-glow: rgba(64, 224, 208, 0.3);
+  --scientific-silver: #F8F9FA;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-navy: var(--primary-navy);
+  --color-electric-blue: var(--electric-blue);
+  --color-electric-glow: var(--electric-glow);
+  --color-scientific-silver: var(--scientific-silver);
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Orbitron", sans-serif;
+
+  --drop-shadow-glow: 0 0 20px var(--electric-glow);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(1, 11, 19, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(248, 249, 250, 0.1);
+}
