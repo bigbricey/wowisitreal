@@ -13,8 +13,8 @@ const orbitron = Orbitron({
 });
 
 export const metadata = {
-  title: "Wow Is It Real | High-Ticket Science & Protocols",
-  description: "Unveiling the truth through high-performance protocols and scientific verification.",
+  title: "Wow Is It Real | AI Tool Reviews & Scam Detection",
+  description: "Is that AI tool actually legit? We analyze AI tools so you don't waste money on overhyped garbage. Scam calculator, verified tools, and honest reviews.",
 };
 
 export default function RootLayout({
